@@ -1,0 +1,78 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Estoque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let produto of produtos$ | async">
+      <td>{{ produto.id }}</td>
+
+      <td style="display: none;">
+
+        <input *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id"
+               [(ngModel)]="produtoEmEdicao.id"
+               placeholder="id do produto">
+      </td>
+
+      <td>
+        <span *ngIf="!produtoEmEdicao || produtoEmEdicao.id !== produto.id">
+          {{ produto.nome }}
+        </span>
+
+        <input *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id"
+               [(ngModel)]="produtoEmEdicao.nome"
+               placeholder="Nome do produto">
+      </td>
+
+      <td>
+        <span *ngIf="!produtoEmEdicao || produtoEmEdicao.id !== produto.id">
+          {{ produto.descricao }}
+        </span>
+
+        <input *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id"
+               [(ngModel)]="produtoEmEdicao.descricao"
+               placeholder="Descrição do produto">
+      </td>
+
+      <td>
+        <span *ngIf="!produtoEmEdicao || produtoEmEdicao.id !== produto.id">
+          {{ produto.preco | currency:'BRL' }}
+        </span>
+
+        <input *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id"
+               type="number"
+               [(ngModel)]="produtoEmEdicao.preco"
+               placeholder="Preço">
+      </td>
+
+      <td>
+        <span *ngIf="!produtoEmEdicao || produtoEmEdicao.id !== produto.id">
+          {{ produto.estoque }}
+        </span>
+
+        <input *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id"
+               type="number"
+               [(ngModel)]="produtoEmEdicao.estoque"
+               placeholder="Estoque">
+      </td>
+
+      <td>
+        <ng-container *ngIf="!produtoEmEdicao || produtoEmEdicao.id !== produto.id">
+          <button (click)="editar(produto)">Editar</button>
+          <button (click)="remover(produto.id!)">Excluir</button>
+        </ng-container>
+
+        <ng-container *ngIf="produtoEmEdicao && produtoEmEdicao.id === produto.id">
+          <button (click)="salvarEdicao()">Salvar</button>
+          <button (click)="cancelarEdicao()">Cancelar</button>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

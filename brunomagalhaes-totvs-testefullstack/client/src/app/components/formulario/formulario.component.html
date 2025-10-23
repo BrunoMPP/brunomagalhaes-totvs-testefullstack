@@ -1,0 +1,10 @@
+
+
+<form #form="ngForm" (ngSubmit)="saveProduct()">
+  <input type="hidden" [(ngModel)]="produtoAtual.id" name="id" />
+  <input type="text" [(ngModel)]="produtoAtual.nome" name="nome" placeholder="Nome do produto" required />
+  <input type="text" [(ngModel)]="produtoAtual.descricao" name="descricao" placeholder="Descrição do produto" required />
+  <input type="number" [(ngModel)]="produtoAtual.preco" name="preco" placeholder="Preço" required />
+  <input type="number" [(ngModel)]="produtoAtual.estoque" name="estoque" placeholder="Estoque" required />
+  <button type="submit">Salvar</button>
+</form>
